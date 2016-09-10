@@ -21,6 +21,9 @@ RUN yum -y install MariaDB-server && /etc/init.d/mysql start && yum -y install c
 RUN yum -y install centreon-widget-graph-monitoring centreon-widget-host-monitoring centreon-widget-service-monitoring centreon-widget-hostgroup-monitoring centreon-widget-servicegroup-monitoring
 # Fix pass in db
 ADD scripts/cbmod.sql /tmp/cbmod.sql
+
+RUN sed -i 's/;date.timezone =/date.timezone = UTC/' /etc/php.ini
+
 RUN /etc/init.d/mysql start && sleep 5 && mysql centreon < /tmp/cbmod.sql && /usr/bin/centreon -u admin -p centreon -a POLLERGENERATE -v 1 && /usr/bin/centreon -u admin -p centreon -a CFGMOVE -v 1 && /etc/init.d/mysql stop
 
 # Set rights for setuid
