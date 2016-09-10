@@ -3,6 +3,10 @@ centreon-docker
 
 This is a docker for Centreon. How to install a Centreon in 5 minutes ?
 
+BEFORE BUILD:
+- you should change default root password in Dockerfile (or change it afterwards)
+- you should change default.timezone from UTC to anthing u want
+
 
 To run this just run: 
 
